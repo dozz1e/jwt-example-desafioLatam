@@ -1,12 +1,13 @@
 $(document).ready(async function () {
   const data = await getGrafico();
-  var barChart = "";
   const paises = data.filter((pais) => {
     return pais.active > 10000;
   });
   grafico(paises);
-  tabla(paises);
+  tabla(data);
 });
+
+var barChart = "";
 
 const getGrafico = async () => {
   try {
@@ -23,6 +24,7 @@ const getGrafico = async () => {
 const getModal = async (pais) => {
   let modalDiv = $("#contenidoModal");
   let modal = "";
+  pais = pais.replace(" ", "_").toLowerCase();
   try {
     const response = await fetch(
       `http://localhost:3000/api/countries/${pais}`,
@@ -41,7 +43,7 @@ const getModal = async (pais) => {
 
 const grafico = (paises, caja = "grafico") => {
   var graficoCanvas = document.getElementById(caja);
-  if (caja != "grafico") barChart.destroy();
+  if (caja != "grafico" && barChart) barChart.destroy();
 
   let actNum = [],
     conNum = [],
@@ -83,7 +85,9 @@ const grafico = (paises, caja = "grafico") => {
     datasets: [activos, confirmados, muertos, recuperados],
   };
 
-  barChart = new Chart(graficoCanvas, {
+  let aux = caja != "grafico" ? "barChart" : "barPrin";
+
+  window[aux] = new Chart(graficoCanvas, {
     type: "bar",
     data: covid,
   });
