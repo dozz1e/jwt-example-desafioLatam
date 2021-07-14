@@ -25,6 +25,13 @@
         color: #121212;
         text-decoration: none;
       }
+      table {
+        width: 100%;
+      }
+      th,
+      td {
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -40,8 +47,20 @@
       <section>
         <h1 class="text-center">Países con Covid19</h1>
         <canvas id="grafico"></canvas>
-        <table id="tabla"></table>
+        <table id="tabla" class="table"></table>
       </section>
+    </div>
+
+    <div id="modals">
+      <div class="modal fade" id="idModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content" id="contenidoModal">
+            <div class="modal-body">
+              <canvas id="cajaGrafico"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script
