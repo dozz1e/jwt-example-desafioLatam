@@ -3,7 +3,8 @@ var barChart,
   aux = false;
 
 const grafico = (paises, caja = "grafico") => {
-  var graficoCanvas = document.getElementById(caja);
+  let graficoCanvas = document.getElementById(caja);
+  let headerCanvas = document.getElementById("headerGrafico");
 
   let actNum = [],
     conNum = [],
@@ -40,19 +41,37 @@ const grafico = (paises, caja = "grafico") => {
     backgroundColor: "#00ACC1",
   };
 
-  var covid = {
-    labels: labels,
-    datasets: [activos, confirmados, muertos, recuperados],
-  };
-
   if (caja != "grafico") {
     aux && barChart.destroy();
+    headerCanvas.innerHTML = `<h2 class="text-center">${labels[0]}</h2>`;
+    const data = {
+      labels: ["Activos", "Confirmados", "Muertos", "Recuperados"],
+      datasets: [
+        {
+          data: [actNum[0], conNum[0], mueNum[0], recNum[0]],
+          backgroundColor: [
+            "rgb(255, 99, 132)",
+            "rgb(75, 192, 192)",
+            "rgb(255, 205, 86)",
+            "rgb(201, 203, 207)",
+            "rgb(54, 162, 235)",
+          ],
+        },
+      ],
+    };
+
     barChart = new Chart(graficoCanvas, {
-      type: "bar",
-      data: covid,
+      type: "pie",
+      data: data,
     });
+
     aux = true;
   } else {
+    var covid = {
+      labels: labels,
+      datasets: [activos, confirmados, muertos, recuperados],
+    };
+
     barPrin = new Chart(graficoCanvas, {
       type: "bar",
       data: covid,
@@ -78,7 +97,7 @@ const tabla = (data) => {
       <td>${row.deaths}</td>
       <td>${row.recovered}</td>
       <td>${row.active}</td>
-      <td><button data-toggle="modal" pais="${row.location}" data-target="#idModal" type="button" class="btn btn-danger">Ver Detalle</button></td>
+      <td><button data-toggle="modal" pais="${row.location}" data-target="#idModal" type="button" class="btn btn-danger btn-detalle">Ver Detalle</button></td>
     </tr>`;
   });
   rows += "</tbody>";

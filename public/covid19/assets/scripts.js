@@ -10,6 +10,8 @@ $(document).ready(async function () {
   tabla(data);
 });
 
-$(document).on("click", ".btn", async function () {
+$(document).on("click", ".btn-detalle", async function () {
   await getModal($(this).attr("pais"));
 });
+
+// Hito 2

@@ -17,14 +17,6 @@
       #grafico {
         height: 100px;
       }
-      a {
-        color: #ccc;
-      }
-      a:hover {
-        background: #ccc;
-        color: #121212;
-        text-decoration: none;
-      }
       table {
         width: 100%;
       }
@@ -38,17 +30,22 @@
     <nav class="navbar navbar-dark bg-dark">
       <div class="navbar-brand">Covid19</div>
       <div>
-        <a href="#">Home</a>
-        <a href="/jwt-practico">Iniciar Sesión</a>
+        <button type="button" class="btn btn-dark" href="#">Home</button>
+        <button
+          type="button"
+          class="btn btn-dark"
+          data-toggle="modal"
+          data-target="#loginModal"
+        >
+          Iniciar Sesión
+        </button>
       </div>
     </nav>
 
     <div class="container">
-      <section>
-        <h1 class="text-center">Países con Covid19</h1>
-        <canvas id="grafico"></canvas>
-        <table id="tabla" class="table"></table>
-      </section>
+      <h1 class="text-center p-3">Países con Covid19</h1>
+      <canvas id="grafico"></canvas>
+      <table id="tabla" class="table mt-3"></table>
     </div>
 
     <div id="modals">
@@ -56,7 +53,46 @@
         <div class="modal-dialog">
           <div class="modal-content" id="contenidoModal">
             <div class="modal-body">
+              <header id="headerGrafico"></header>
               <canvas id="cajaGrafico"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="loginModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body p-5">
+              <div class="row justify-content-center align-items-center">
+                <div class="col-md-12">
+                  <h3 class="text-center pb-5">Mini taller Jwt</h3>
+                </div>
+                <div id="js-form-wrapper" class="col-md-12">
+                  <form id="js-form">
+                    <div class="form-group">
+                      <label for="js-input-email">Email address</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="js-input-email"
+                        aria-describedby="emailHelp"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="js-input-password">Password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="js-input-password"
+                      />
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                      Submit
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
